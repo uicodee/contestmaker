@@ -1,15 +1,16 @@
-from aiogram import Dispatcher
 from aiogram.types import Message
 
-from tgbot.models.role import UserRole
+from tgbot.keyboards.inline.admin_panel import admin_panel
 
 
-async def admin_start(m: Message):
-    await m.reply("Hello, admin!")
+async def admin_start(message: Message):
+    await message.answer(
+        text="Admin panelga xush kelibsiz",
+        reply_markup=admin_panel()
+    )
 
 
-def register_admin(dp: Dispatcher):
-    dp.register_message_handler(admin_start, commands=["start"], state="*", role=UserRole.ADMIN)
+
     # # or you can pass multiple roles:
     # dp.register_message_handler(admin_start, commands=["start"], state="*", role=[UserRole.ADMIN])
     # # or use another filter:

@@ -1,5 +1,7 @@
 from aiogram.dispatcher.middlewares import LifetimeControllerMiddleware
 
+from tgbot.service.repo.repository import SQLAlchemyRepos
+
 
 class DbSessionMiddleware(LifetimeControllerMiddleware):
     skip_patterns = ["error", "update"]
@@ -10,7 +12,9 @@ class DbSessionMiddleware(LifetimeControllerMiddleware):
 
     async def pre_process(self, obj, data, *args):
         session = self.session_pool()
-        data["session"] = session
+        data['session'] = session
+        repo = SQLAlchemyRepos(session)
+        data['repo'] = repo
 
     async def post_process(self, obj, data, *args):
         session = data.get("session")

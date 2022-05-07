@@ -9,8 +9,10 @@ from sqlalchemy.orm import sessionmaker
 
 from tgbot.config import load_config
 from tgbot.filters.role import RoleFilter, AdminFilter
-from tgbot.handlers.admin import register_admin
-from tgbot.handlers.user import register_user
+from tgbot.handlers.commands import register_admin
+from tgbot.handlers.commands import register_user
+from tgbot.handlers.content import register_content
+from tgbot.handlers.query_handlers import register_query_handler
 from tgbot.middlewares.db import DbSessionMiddleware
 from tgbot.middlewares.role import RoleMiddleware
 from tgbot.misc.req_func import make_connection_string
@@ -42,8 +44,10 @@ async def main():
     dp.filters_factory.bind(RoleFilter)
     dp.filters_factory.bind(AdminFilter)
 
-    register_admin(dp)
     register_user(dp)
+    register_admin(dp)
+    register_query_handler(dp)
+    register_content(dp)
 
     # start
     try:
