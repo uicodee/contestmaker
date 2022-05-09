@@ -7,7 +7,7 @@ class Contest(BaseModel):
     __tablename__ = 'contests'
 
     id = Column(BigInteger(), autoincrement=True, nullable=False, primary_key=True)
-    name = Column(String(length=20), nullable=False)
+    name = Column(String(length=300), nullable=False)
     finished = Column(Boolean(), nullable=False)
 
     def __repr__(self):
