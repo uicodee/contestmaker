@@ -8,3 +8,8 @@ class ChannelForm(StatesGroup):
 
 class ContestForm(StatesGroup):
     name = State()
+
+
+class RandomForm(StatesGroup):
+    contest_id = State()
+    winners = State()

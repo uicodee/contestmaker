@@ -1,6 +1,6 @@
 from aiogram import types
 
-from tgbot.keyboards.inline.channels_list import channels_list_keyboard
+from tgbot.data.strings import subscribe_alert
 from tgbot.service.repo.channel_repo import ChannelRepo
 from tgbot.service.repo.repository import SQLAlchemyRepos
 from tgbot.service.repo.user_repo import UserRepo
@@ -18,7 +18,16 @@ async def check_subscription(query: types.CallbackQuery, repo: SQLAlchemyRepos):
         )
         statuses.append(status.status)
     if 'left' in statuses:
-        await query.answer(text='Barcha kanallarga obuna bo\'ling!', show_alert=True)
+        await query.answer(text=subscribe_alert, show_alert=True)
     else:
-        await user.update_status(user_id=query.from_user.id, subscribed=True)
+        if await user.get_user(user_id=query.from_user.id) is None:
+            await user.add_user(
+                user_id=query.from_user.id,
+                name=query.from_user.full_name,
+                username=query.from_user.username,
+                subscribed=True,
+                referrals=0
+            )
+        else:
+            await user.update_status(user_id=query.from_user.id, subscribed=True)
         await query.message.delete()

@@ -8,6 +8,7 @@ def admin_panel() -> types.InlineKeyboardMarkup:
         types.InlineKeyboardButton(text="📃 Kanallar ro'yxati", callback_data="channels_list"),
         types.InlineKeyboardButton(text="🎉 Konkurs yaratish", callback_data="add_contest"),
         types.InlineKeyboardButton(text="🎁 Konkurslar ro'yxati", callback_data="contests_list"),
+        types.InlineKeyboardButton(text="🎲 Randomizer", callback_data="random"),
     )
 
     return keyboard

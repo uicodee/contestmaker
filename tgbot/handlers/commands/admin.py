@@ -1,11 +1,12 @@
 from aiogram.types import Message
 
+from tgbot.data.strings import welcome_admin
 from tgbot.keyboards.inline.admin_panel import admin_panel
 
 
 async def admin_start(message: Message):
     await message.answer(
-        text="Admin panelga xush kelibsiz",
+        text=welcome_admin,
         reply_markup=admin_panel()
     )
 

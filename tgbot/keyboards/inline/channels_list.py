@@ -10,6 +10,8 @@ def channels_list_keyboard(channels: list[Channel]) -> types.InlineKeyboardMarku
         keyboard.add(
             types.InlineKeyboardButton(text=f"{channel.name}", callback_data=cb_channel_view.new(channel_id=channel.id)),
             types.InlineKeyboardButton(text="🗑", callback_data=cb_channel_delete.new(channel_id=channel.id)),
+            types.InlineKeyboardButton(text="🏠 Asosiy menu", callback_data='main_menu'),
+
         )
 
     return keyboard
