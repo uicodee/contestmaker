@@ -1,4 +1,6 @@
-from sqlalchemy import insert, select, update
+import datetime
+
+from sqlalchemy import insert, select, update, func
 
 from tgbot.models.user import User
 from tgbot.service.repo.base_repo import BaseSQLAlchemyRepo
@@ -24,6 +26,12 @@ class UserRepo(BaseSQLAlchemyRepo):
         user = request.scalar()
         return user
 
+    async def get_users(self) -> model:
+        sql = select(self.model)
+        request = await self._session.execute(sql)
+        user = request.scalars().all()
+        return user
+
     async def update_status(self, user_id: int, subscribed: bool):
         sql = update(self.model).where(self.model.user_id == user_id).values({'subscribed': subscribed})
         await self._session.execute(sql)
@@ -35,3 +43,13 @@ class UserRepo(BaseSQLAlchemyRepo):
             {"referrals": int(result.scalar()) + count})
         await self._session.execute(sql)
         await self._session.commit()
+
+    async def count_user(self):
+        sql = select(func.count()).select_from(self.model)
+        request = await self._session.execute(sql)
+        return request.scalar()
+
+    async def today_users(self, date: datetime.datetime):
+        sql = select(func.count()).select_from(self.model).where(self.model.created_at == date)
+        request = await self._session.execute(sql)
+        return request.scalar()

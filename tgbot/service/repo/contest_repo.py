@@ -19,6 +19,12 @@ class ContestRepo(BaseSQLAlchemyRepo):
         contests = request.scalars().all()
         return contests
 
+    async def get_contest_finished(self) -> list[model]:
+        sql = select(self.model).filter(self.model.finished == True)
+        request = await self._session.execute(sql)
+        contests = request.scalars().all()
+        return contests
+
     async def delete_cont(self, contest_id: int):
         sql = delete(self.model).filter(self.model.id == contest_id)
         await self._session.execute(sql)

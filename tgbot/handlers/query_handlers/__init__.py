@@ -10,7 +10,8 @@ from .add_contest import add_contest
 from .contests_list import contests_list
 from .contest_actions import delete_contest, view_contest, back_contest
 from .random import random, select_contest, select_count_winners, start_randomise
-
+from .stats import stats
+from .broadcast import alert_broadcast, broadcast
 
 from tgbot.callback_datas.callback_datas import (
     cb_channel_view,
@@ -38,6 +39,9 @@ def register_query_handler(dp: Dispatcher):
     dp.register_callback_query_handler(select_contest, cb_select_contest.filter(), state=RandomForm.contest_id)
     dp.register_callback_query_handler(select_count_winners, cb_select_count.filter(), state=RandomForm.winners)
     dp.register_callback_query_handler(start_randomise, text='start_random')
+    dp.register_callback_query_handler(stats, text='stats')
+    dp.register_callback_query_handler(alert_broadcast, text='broadcast')
+    dp.register_callback_query_handler(broadcast, text='start_broadcast')
 
     dp.register_callback_query_handler(main_menu, text='main_menu', state="*")
     dp.register_callback_query_handler(cancel, text='cancel', state="*")

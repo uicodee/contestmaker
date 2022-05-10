@@ -13,3 +13,8 @@ class ContestForm(StatesGroup):
 class RandomForm(StatesGroup):
     contest_id = State()
     winners = State()
+
+
+class BroadcastForm(StatesGroup):
+    content = State()
+

@@ -51,6 +51,20 @@ check_random_info = "Ma'lumotlarni qayta tekshirib oling:\n\n" \
                     "va random foydalanuvchilarni tanlash boshlanadi"
 
 winner_congrats = "🥳 Tabriklaymiz siz {contest_name} konkursida ishtirok etib g'alaba qozondingiz!"
+stats_info = "📈 Bot foydalanuvchilari statistikasi:\n\n" \
+             "👤 Foydalanuvchilar soni: {users_count}\n" \
+             "🎊 Konkurslar soni: {contest_count}\n" \
+             "🥳 Tugatilgan konkurslar soni: {finished_contest}\n" \
+             "📅 Bugun qo'shilgan foydalanuvchilar soni: {today_users}\n" \
+
+broadcast_message = "📁 Rasm, video, audio, dokument va boshqa fayllarni pastki yozu va boshqa ma'lumotlar bilan " \
+                    "<b>1 TA XABAR</b> ko'rinishida yuboring"
+
+stats_broadcast = "📈 Bot xabar yuborish statistikasi:\n\n" \
+                  "✅ Yuborildi: {delivered}\n" \
+                  "❌ Yuborilmadi: {undelivered}\n" \
+                  "⏰ Sarflangan vaqt: {time}"
+
 # Buttons
 cancel = "❌ Bekor qilish"
 confirm = "✅ Tasdiqlash"
